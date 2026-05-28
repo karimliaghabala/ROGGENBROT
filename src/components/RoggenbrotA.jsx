@@ -251,7 +251,7 @@ export default function App() {
               <Result title="Sauermehl" value={`${result.sauerMehl.toFixed(0)} g`} />
               <Result title="Wasser" value={`${result.sauerWasser.toFixed(0)} g`} />
               <Result title="Anstellgut" value={`${result.anstellgut.toFixed(0)} g`} />
-              <Result title="Gesamt Sauerteig ohne Anstellgut" value={`${result.sauerGesamt.toFixed(0)} g`} />
+            
 
               <Explanation>
                 Sauermehl: {result.roggenmehl.toFixed(0)} × {result.versauerndePercent}% = {result.sauerMehl.toFixed(0)} g<br />
