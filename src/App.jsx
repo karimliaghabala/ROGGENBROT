@@ -13,7 +13,7 @@ const App = () => {
         <header className="w-full bg-white shadow-sm">
           <div className="max-w-6xl mx-auto px-3 py-4 sm:px-4 sm:py-6">
             <h1 className="text-xl sm:text-3xl font-bold text-gray-800 text-center">
-              Brot Rezepte Rechner
+              Brot Rezepte Rechner (DBA 042)
             </h1>
           </div>
         </header>
