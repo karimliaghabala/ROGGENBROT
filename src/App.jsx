@@ -10,8 +10,8 @@ const App = () => {
 
         {/* HEADER */}
         <header className="w-full bg-white shadow-sm">
-          <div className="max-w-6xl mx-auto px-4 py-6">
-            <h1 className="text-2xl md:text-3xl font-bold text-gray-800 text-center">
+          <div className="max-w-6xl mx-auto px-3 py-4 sm:px-4 sm:py-6">
+            <h1 className="text-xl sm:text-3xl font-bold text-gray-800 text-center">
               Brot Rezepte Rechner
             </h1>
           </div>
@@ -19,21 +19,21 @@ const App = () => {
 
         {/* NAVIGATION */}
         <nav className="w-full bg-gray-50 border-b">
-          <div className="max-w-6xl mx-auto px-4 py-4">
-            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+          <div className="max-w-6xl mx-auto px-3 py-3 sm:px-4 sm:py-4">
+            <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 justify-center">
 
               <Link
                 to="/roggenbrot"
-                className="flex-1 sm:flex-none text-center px-6 py-3 rounded-lg bg-gray-800 text-white
-                           hover:bg-gray-700 transition"
+                className="w-full sm:w-auto text-center px-4 py-3 rounded-lg bg-gray-800 text-white
+                           hover:bg-gray-700 transition text-sm sm:text-base"
               >
                 Roggenbrot
               </Link>
 
               <Link
                 to="/weisbrot"
-                className="flex-1 sm:flex-none text-center px-6 py-3 rounded-lg bg-gray-800 text-white
-                           hover:bg-gray-700 transition"
+                className="w-full sm:w-auto text-center px-4 py-3 rounded-lg bg-gray-800 text-white
+                           hover:bg-gray-700 transition text-sm sm:text-base"
               >
                 Weißbrot
               </Link>
@@ -44,9 +44,9 @@ const App = () => {
 
         {/* CONTENT */}
         <main className="flex-1 w-full">
-          <div className="max-w-6xl mx-auto px-4 py-10">
+          <div className="max-w-6xl mx-auto px-3 py-6 sm:px-4 sm:py-10">
 
-            <div className="bg-white rounded-2xl shadow-md p-4 sm:p-8 min-h-[60vh]">
+            <div className="bg-white rounded-xl sm:rounded-2xl shadow-md p-4 sm:p-8 min-h-[60vh]">
 
               <Routes>
                 <Route path="/roggenbrot" element={<Roggenbrot />} />
