@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Roggenbrot from "./components/Roggenbrot";
+import RoggenbrotA from "./components/RoggenbrotA";
 import Weisbrot from "./components/Weisbrot";
 
 const App = () => {
@@ -27,16 +28,17 @@ const App = () => {
                 className="w-full sm:w-auto text-center px-4 py-3 rounded-lg bg-gray-800 text-white
                            hover:bg-gray-700 transition text-sm sm:text-base"
               >
-                Roggenbrot
+                Roggenbrot(M)
               </Link>
-
-              <Link
-                to="/weisbrot"
+                            <Link
+                to="/roggenbrota"
                 className="w-full sm:w-auto text-center px-4 py-3 rounded-lg bg-gray-800 text-white
                            hover:bg-gray-700 transition text-sm sm:text-base"
               >
-                Weißbrot
+                Roggenbrot(A)
               </Link>
+
+
 
             </div>
           </div>
@@ -50,6 +52,7 @@ const App = () => {
 
               <Routes>
                 <Route path="/roggenbrot" element={<Roggenbrot />} />
+                <Route path="/roggenbrota" element={<RoggenbrotA />} />
                 <Route path="/weisbrot" element={<Weisbrot />} />
 
                 {/* Default page */}
