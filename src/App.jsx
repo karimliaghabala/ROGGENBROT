@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route, Link,HashRouter } from "react-router-dom";
+import { HashRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Roggenbrot from "./components/Roggenbrot";
 import RoggenbrotA from "./components/RoggenbrotA";
 import Weisbrot from "./components/Weisbrot";
