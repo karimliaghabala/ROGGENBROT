@@ -24,21 +24,28 @@ const App = () => {
             <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 justify-center">
 
               <Link
+                to="/"
+                className="w-full sm:w-auto text-center px-4 py-3 rounded-lg bg-green-700 text-white
+                           hover:bg-green-600 transition text-sm sm:text-base"
+              >
+                Zur Startseite
+              </Link>
+
+              <Link
                 to="/roggenbrot"
                 className="w-full sm:w-auto text-center px-4 py-3 rounded-lg bg-gray-800 text-white
                            hover:bg-gray-700 transition text-sm sm:text-base"
               >
                 Roggenbrot(M)
               </Link>
-                            <Link
+
+              <Link
                 to="/roggenbrota"
                 className="w-full sm:w-auto text-center px-4 py-3 rounded-lg bg-gray-800 text-white
                            hover:bg-gray-700 transition text-sm sm:text-base"
               >
                 Roggenbrot(A)
               </Link>
-
-
 
             </div>
           </div>
@@ -65,6 +72,17 @@ const App = () => {
                   }
                 />
               </Routes>
+
+              {/* BOTTOM HOME BUTTON */}
+              <div className="mt-8 text-center">
+                <Link
+                  to="/"
+                  className="inline-block px-5 py-3 rounded-lg bg-green-700 text-white
+                             hover:bg-green-600 transition text-sm sm:text-base"
+                >
+                  Zur Startseite
+                </Link>
+              </div>
 
             </div>
           </div>
