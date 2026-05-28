@@ -60,7 +60,7 @@ const App = () => {
                   path="/"
                   element={
                     <div className="text-center text-gray-600">
-                      <p className="text-lg">Bir resept seç 😄</p>
+                      <p className="text-lg">Lass uns berechnen, welches Brotrezept wir nehmen 😄</p>
                     </div>
                   }
                 />
