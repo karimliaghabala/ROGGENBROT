@@ -3,5 +3,9 @@
     "api/**/*.js": {
       "runtime": "vercel-node@3.0.1"
     }
-  }
+  },
+    "rewrites": [
+    { "source": "/(.*)", "destination": "/" }
+  ]
+  
 }
