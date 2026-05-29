@@ -11,6 +11,7 @@ export default function App() {
     salz: "",
     brotAnzahl: "",
     brotGewicht: "",
+    backverlust: "",
     versauerndeMehlmenge: "",
     anstellgutmenge: "",
     sauerTa: "",
@@ -65,7 +66,14 @@ export default function App() {
   const berechneBrotmenge = () => {
     const anzahl = Number(form.brotAnzahl);
     const gewicht = Number(form.brotGewicht);
-    const totalTeig = anzahl * gewicht;
+    const backverlust = Number(form.backverlust);
+
+    const gebackenesGesamtgewicht = anzahl * gewicht;
+
+    const totalTeig =
+      backverlust > 0 && backverlust < 100
+        ? gebackenesGesamtgewicht / (1 - backverlust / 100)
+        : gebackenesGesamtgewicht;
 
     setBrotResult(totalTeig);
     triggerAnimation("brotmenge");
@@ -201,7 +209,8 @@ export default function App() {
         <Section title="Brotmengenrechner" color="from-blue-500 to-cyan-500">
           <div className="grid md:grid-cols-2 gap-4 sm:gap-5">
             <Input label="Anzahl der Brote" name="brotAnzahl" value={form.brotAnzahl} onChange={handleChange} />
-            <Input label="Gewicht pro Brot (g)" name="brotGewicht" value={form.brotGewicht} onChange={handleChange} />
+            <Input label="Gewicht pro Brot nach dem Backen (g)" name="brotGewicht" value={form.brotGewicht} onChange={handleChange} />
+            <Input label="Backverlust / Buxarlanma (%)" name="backverlust" value={form.backverlust} onChange={handleChange} />
           </div>
 
           <Button color="bg-blue-600" onClick={berechneBrotmenge}>
@@ -210,14 +219,36 @@ export default function App() {
 
           {brotResult !== null && (
             <AnimatedResultBox key={animationKeys.brotmenge}>
-              <Result delay={100} title="Benötigte Gesamtteigmenge" value={`${brotResult.toFixed(0)} g`} color="bg-blue-50 text-blue-800" />
+              <Result
+                delay={100}
+                title="Benötigte Gesamtteigmenge vor dem Backen"
+                value={`${brotResult.toFixed(0)} g`}
+                color="bg-blue-50 text-blue-800"
+              />
+
+              {Number(form.backverlust) > 0 && Number(form.backverlust) < 100 && (
+                <Result
+                  delay={220}
+                  title="Gewünschtes Gesamtgewicht nach dem Backen"
+                  value={`${(Number(form.brotAnzahl) * Number(form.brotGewicht)).toFixed(0)} g`}
+                  color="bg-cyan-50 text-cyan-800"
+                />
+              )}
 
               <Explanation
                 delay={300}
-                lines={[
-                  `Benötigte Gesamtteigmenge: ${form.brotAnzahl} × ${form.brotGewicht} g = ${brotResult.toFixed(0)} g`,
-                  "Die benötigte Teigmenge wird berechnet, indem die Anzahl der Brote mit dem gewünschten Gewicht pro Brot multipliziert wird.",
-                ]}
+                lines={
+                  Number(form.backverlust) > 0 && Number(form.backverlust) < 100
+                    ? [
+                        `Gewünschtes Backgewicht: ${form.brotAnzahl} × ${form.brotGewicht} g = ${(Number(form.brotAnzahl) * Number(form.brotGewicht)).toFixed(0)} g`,
+                        `Backverlust: ${form.backverlust}%. Bişməmiş xəmir çəkisi: ${(Number(form.brotAnzahl) * Number(form.brotGewicht)).toFixed(0)} g ÷ (1 - ${form.backverlust} / 100) = ${brotResult.toFixed(0)} g`,
+                        "Əgər Backverlust verilirsə, buxarlanma itkisi nəzərə alınır və sobaya qoyulacaq bişməmiş xəmir miqdarı hesablanır.",
+                      ]
+                    : [
+                        `Benötigte Gesamtteigmenge: ${form.brotAnzahl} × ${form.brotGewicht} g = ${brotResult.toFixed(0)} g`,
+                        "Backverlust verilmədiyi üçün xəmir miqdarı sadəcə brot sayı ilə bir brotun çəkisinin hasilidir.",
+                      ]
+                }
               />
             </AnimatedResultBox>
           )}
