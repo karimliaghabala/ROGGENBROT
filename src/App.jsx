@@ -3,6 +3,7 @@ import { HashRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Roggenbrot from "./components/Roggenbrot";
 import RoggenbrotA from "./components/RoggenbrotA";
 import Weisbrot from "./components/Weisbrot";
+import Wassertemperatur from "./components/Wassertemperatur";
 
 const App = () => {
   return (
@@ -36,7 +37,7 @@ const App = () => {
                 className="w-full sm:w-auto text-center px-4 py-3 rounded-lg bg-gray-800 text-white
                            hover:bg-gray-700 transition text-sm sm:text-base"
               >
-                Roggenbrot(M)
+                Roggenbrot(Manuell)
               </Link>
 
               <Link
@@ -44,7 +45,15 @@ const App = () => {
                 className="w-full sm:w-auto text-center px-4 py-3 rounded-lg bg-gray-800 text-white
                            hover:bg-gray-700 transition text-sm sm:text-base"
               >
-                Roggenbrot(A)
+                Roggenbrot(Automatisch)
+              </Link>
+
+                            <Link
+                to="/wassertempuratur"
+                className="w-full sm:w-auto text-center px-4 py-3 rounded-lg bg-gray-800 text-white
+                           hover:bg-gray-700 transition text-sm sm:text-base"
+              >
+                Wassertemperatur
               </Link>
 
             </div>
@@ -61,6 +70,7 @@ const App = () => {
                 <Route path="/roggenbrot" element={<Roggenbrot />} />
                 <Route path="/roggenbrota" element={<RoggenbrotA />} />
                 <Route path="/weisbrot" element={<Weisbrot />} />
+                <Route path="/wassertempuratur" element={<Wassertemperatur/>} />
 
                 {/* Default page */}
                 <Route
