@@ -55,6 +55,13 @@ const App = () => {
               >
                 Wassertemperatur
               </Link>
+                                          <Link
+                to="/weisbrot"
+                className="w-full sm:w-auto text-center px-4 py-3 rounded-lg bg-gray-800 text-white
+                           hover:bg-gray-700 transition text-sm sm:text-base"
+              >
+                Weisbrot Resepturmenge
+              </Link>
 
             </div>
           </div>
@@ -71,6 +78,7 @@ const App = () => {
                 <Route path="/roggenbrota" element={<RoggenbrotA />} />
                 <Route path="/weisbrot" element={<Weisbrot />} />
                 <Route path="/wassertempuratur" element={<Wassertemperatur/>} />
+                <Route path="/weisbrot" element={<Weisbrot/>} />
 
                 {/* Default page */}
                 <Route
