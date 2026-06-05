@@ -58,11 +58,11 @@ const calculate = () => {
       <div className="max-w-4xl mx-auto space-y-8">
 
         <div className="bg-white rounded-3xl shadow-xl p-8">
-          <h1 className="text-4xl font-bold text-gray-900">
+          <h1 className="text-2xl sm:text-4xl font-bold mb-6 sm:mb-8 text-gray-900">
             Brot Rezept Rechner
           </h1>
 
-          <p className="text-gray-600 mt-2">
+          <p className="text-2xl sm:text-4xl font-bold mb-6 sm:mb-8 text-gray-900">
             Weißbrot & Kaviarbrot – Mengenberechnung
           </p>
         </div>
@@ -80,14 +80,14 @@ const calculate = () => {
           <div className="flex gap-4 mt-6">
             <button
               onClick={calculate}
-              className="flex-1 bg-emerald-700 text-white py-4 rounded-2xl text-xl font-bold hover:bg-emerald-600 transition"
+              className="flex-1 bg-emerald-700 py-4 rounded-2xl  hover:bg-emerald-600 transition text-2xl sm:text-4xl font-bold mb-6 sm:mb-8 text-gray-900"
             >
               Berechnen
             </button>
 
             <button
               onClick={reset}
-              className="flex-1 bg-red-500 text-white py-4 rounded-2xl text-xl font-bold hover:bg-red-400 transition"
+              className="flex-1 bg-red-500  py-4 rounded-2xl  hover:bg-red-400 transition text-2xl sm:text-4xl font-bold mb-6 sm:mb-8 text-gray-900"
             >
               Zurücksetzen
             </button>
