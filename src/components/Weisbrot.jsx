@@ -14,39 +14,39 @@ export default function App() {
     water: 805,
   };
 
-const calculate = () => {
-  setResult(null); // əvvəlcə nəticəni sıfırla
+  const calculate = () => {
+    setResult(null);
 
-  setTimeout(() => {
-    const count = Number(broetchen);
-    if (!count || count <= 0) return;
+    setTimeout(() => {
+      const count = Number(broetchen);
 
-    const factor = count / 4;
+      if (!count || count <= 0) return;
 
-    const scaled = Object.fromEntries(
-      Object.entries(baseRecipe).map(([key, value]) => [
-        key,
-        +(value * factor).toFixed(1),
-      ])
-    );
+      const factor = count / 4;
 
-    const totalDough =
-      scaled.flour +
-      scaled.yeast +
-      scaled.salt +
-      scaled.malt +
-      scaled.milkPowder +
-      scaled.margarine +
-      scaled.water;
+      const scaled = Object.fromEntries(
+        Object.entries(baseRecipe).map(([key, value]) => [
+          key,
+          +(value * factor).toFixed(1),
+        ])
+      );
 
-    setResult({
-      ...scaled,
-      totalDough: totalDough.toFixed(1),
-      count,
-    });
-  }, 1000); // 1 saniyəlik gecikmə
-};
+      const totalDough =
+        scaled.flour +
+        scaled.yeast +
+        scaled.salt +
+        scaled.malt +
+        scaled.milkPowder +
+        scaled.margarine +
+        scaled.water;
 
+      setResult({
+        ...scaled,
+        totalDough: totalDough.toFixed(1),
+        count,
+      });
+    }, 1000);
+  };
 
   const reset = () => {
     setBroetchen("");
@@ -54,15 +54,15 @@ const calculate = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-100 via-orange-50 to-emerald-50 p-4">
-      <div className="max-w-4xl mx-auto space-y-8">
+    <div className="min-h-screen bg-gradient-to-br from-slate-100 via-orange-50 to-emerald-50 px-3 py-4 sm:p-4">
+      <div className="max-w-4xl mx-auto space-y-6 sm:space-y-8">
 
-        <div className="bg-white rounded-3xl shadow-xl p-8">
-          <h1 className="text-2xl sm:text-4xl font-bold mb-6 sm:mb-8 text-gray-900">
+        <div className="bg-white rounded-3xl shadow-xl p-4 sm:p-8">
+          <h1 className="text-xl sm:text-3xl lg:text-4xl font-bold mb-4 text-gray-900">
             Brot Rezept Rechner
           </h1>
 
-          <p className="text-2xl sm:text-4xl font-bold mb-6 sm:mb-8 text-gray-900">
+          <p className="text-lg sm:text-2xl lg:text-3xl font-bold text-gray-900">
             Weißbrot & Kaviarbrot – Mengenberechnung
           </p>
         </div>
@@ -77,17 +77,17 @@ const calculate = () => {
             />
           </div>
 
-          <div className="flex gap-4 mt-6">
+          <div className="flex flex-col sm:flex-row gap-4 mt-6">
             <button
               onClick={calculate}
-              className="flex-1 bg-emerald-700 py-4 rounded-2xl  hover:bg-emerald-600 transition text-2xl sm:text-4xl font-bold mb-6 sm:mb-8 text-gray-900"
+              className="flex-1 bg-emerald-700 py-3 sm:py-4 rounded-2xl hover:bg-emerald-600 transition text-lg sm:text-2xl font-bold text-white"
             >
               Berechnen
             </button>
 
             <button
               onClick={reset}
-              className="flex-1 bg-red-500  py-4 rounded-2xl  hover:bg-red-400 transition text-2xl sm:text-4xl font-bold mb-6 sm:mb-8 text-gray-900"
+              className="flex-1 bg-red-500 py-3 sm:py-4 rounded-2xl hover:bg-red-400 transition text-lg sm:text-2xl font-bold text-white"
             >
               Zurücksetzen
             </button>
@@ -102,14 +102,22 @@ const calculate = () => {
                 color="bg-emerald-50 text-emerald-800"
               />
 
-              <div className="bg-white rounded-2xl shadow p-5 space-y-2 text-gray-800">
+              <div className="bg-white rounded-2xl shadow p-4 sm:p-5 space-y-2 text-gray-800 text-sm sm:text-base">
+
                 <p>Weizenmehl (550): <b>{result.flour} g</b></p>
+
                 <p>Hefe: <b>{result.yeast} g</b></p>
+
                 <p>Salz: <b>{result.salt} g</b></p>
+
                 <p>Malzbackmittel: <b>{result.malt} g</b></p>
+
                 <p>Vollmilchpulver: <b>{result.milkPowder} g</b></p>
+
                 <p>Backmargarine: <b>{result.margarine} g</b></p>
+
                 <p>Wasser: <b>{result.water} g</b></p>
+
               </div>
 
               <Result
@@ -118,19 +126,28 @@ const calculate = () => {
                 color="bg-yellow-50 text-yellow-800"
               />
 
-              <div className="bg-gray-950 text-green-300 p-4 rounded-xl font-mono text-sm">
-                Gesamtteig = Summe aller Zutaten  
+              <div className="bg-gray-950 text-green-300 p-4 rounded-xl font-mono text-xs sm:text-sm overflow-x-auto">
+                Gesamtteig = Summe aller Zutaten
                 <br />
                 = {result.totalDough} g
               </div>
 
-              <div className="bg-gray-100 p-4 rounded-2xl shadow text-gray-800 leading-relaxed">
-                <h3 className="font-bold text-lg mb-2">Zubereitung:</h3>
+              <div className="bg-gray-100 p-4 rounded-2xl shadow text-gray-800 leading-relaxed text-sm sm:text-base">
+                <h3 className="font-bold text-base sm:text-lg mb-2">
+                  Zubereitung:
+                </h3>
+
                 <p>
-                  Knetung: 4 Min Stufe 1, 3 Min Stufe 2.  
-                  Teigtemperatur: 26°C, Teigruhe: 15 Min.  
-                  Rundwirken, entspannen lassen, formen.  
-                  Stückgare: 35 Min bei 32°C & 72% Luftfeuchtigkeit.  
+                  Knetung: 4 Min Stufe 1, 3 Min Stufe 2.
+                  <br />
+                  Teigtemperatur: 26°C
+                  <br />
+                  Teigruhe: 15 Min.
+                  <br />
+                  Rundwirken, entspannen lassen, formen.
+                  <br />
+                  Stückgare: 35 Min bei 32°C & 72% Luftfeuchtigkeit.
+                  <br />
                   Backen: 220°C für ca. 35 Min.
                 </p>
               </div>
@@ -141,15 +158,21 @@ const calculate = () => {
 
       </div>
 
-      {/* ChatGPT slide animation */}
       <style>
         {`
           .animate-chatSlide {
             animation: chatSlide 0.45s ease-out forwards;
           }
+
           @keyframes chatSlide {
-            from { opacity: 0; transform: translateY(20px) scale(0.97); }
-            to { opacity: 1; transform: translateY(0) scale(1); }
+            from {
+              opacity: 0;
+              transform: translateY(20px) scale(0.97);
+            }
+            to {
+              opacity: 1;
+              transform: translateY(0) scale(1);
+            }
           }
         `}
       </style>
@@ -160,7 +183,7 @@ const calculate = () => {
 function Input({ label, value, onChange }) {
   return (
     <div>
-      <label className="block mb-2 font-semibold text-gray-700">
+      <label className="block mb-2 font-semibold text-gray-700 text-sm sm:text-base">
         {label}
       </label>
 
@@ -168,7 +191,7 @@ function Input({ label, value, onChange }) {
         type="number"
         value={value}
         onChange={onChange}
-        className="w-full border border-gray-300 rounded-xl px-4 py-3 text-lg focus:outline-none focus:ring-2 focus:ring-emerald-600"
+        className="w-full border border-gray-300 rounded-xl px-4 py-3 text-base sm:text-lg focus:outline-none focus:ring-2 focus:ring-emerald-600"
       />
     </div>
   );
@@ -176,8 +199,8 @@ function Input({ label, value, onChange }) {
 
 function Section({ title, children }) {
   return (
-    <div className="bg-white rounded-3xl shadow-xl p-8">
-      <h2 className="text-3xl font-bold mb-6 text-gray-900">
+    <div className="bg-white rounded-3xl shadow-xl p-4 sm:p-8">
+      <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold mb-6 text-gray-900">
         {title}
       </h2>
 
@@ -189,15 +212,17 @@ function Section({ title, children }) {
 function Result({ title, value, color }) {
   return (
     <div
-      className={`flex justify-between items-center rounded-xl px-5 py-4 ${color}`}
+      className={`flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 rounded-xl px-4 sm:px-5 py-4 ${color}`}
     >
-      <span className="font-semibold text-lg">
+      <span className="font-semibold text-base sm:text-lg">
         {title}
       </span>
 
-      <span className="font-black text-2xl">
-        {value}
-      </span>
+      {value && (
+        <span className="font-black text-xl sm:text-2xl break-words">
+          {value}
+        </span>
+      )}
     </div>
   );
 }
