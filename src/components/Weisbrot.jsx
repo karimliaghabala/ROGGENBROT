@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 
 export default function App() {
@@ -45,7 +46,7 @@ export default function App() {
         totalDough: totalDough.toFixed(1),
         count,
       });
-    }, 1000);
+    }, 800);
   };
 
   const reset = () => {
@@ -54,128 +55,182 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-100 via-orange-50 to-emerald-50 px-3 py-4 sm:p-4">
-      <div className="max-w-4xl mx-auto space-y-6 sm:space-y-8">
+    <div className="min-h-screen bg-gradient-to-br from-slate-100 via-orange-50 to-emerald-50 p-3 sm:p-6">
 
-        <div className="bg-white rounded-3xl shadow-xl p-4 sm:p-8">
-          <h1 className="text-xl sm:text-3xl lg:text-4xl font-bold mb-4 text-gray-900">
-            Brot Rezept Rechner
-          </h1>
+      <style>{`
+        @keyframes sectionSlide {
+          from {
+            opacity: 0;
+            transform: translateY(-24px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
 
-          <p className="text-lg sm:text-2xl lg:text-3xl font-bold text-gray-900">
-            Weißbrot & Kaviarbrot – Mengenberechnung
-          </p>
-        </div>
+        @keyframes resultSlide {
+          from {
+            opacity: 0;
+            transform: translateY(-18px) scale(.98);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+          }
+        }
 
-        <Section title="Rezept Berechnung">
+        .section-slide {
+          animation: sectionSlide .6s ease forwards;
+        }
 
-          <div className="grid md:grid-cols-2 gap-5">
+        .result-slide {
+          animation: resultSlide .45s ease forwards;
+        }
+      `}</style>
+
+      <div className="max-w-5xl mx-auto space-y-8">
+
+        <div className="section-slide bg-white rounded-3xl shadow-xl border border-orange-100 overflow-hidden">
+
+          <div className="bg-gradient-to-r from-emerald-600 to-teal-600 p-6 sm:p-8 text-white">
+
+            <h1 className="text-3xl sm:text-5xl font-black">
+              Brot Rezept Rechner
+            </h1>
+
+            <p className="mt-3 text-base sm:text-xl text-emerald-50">
+              Weißbrot & Kaviarbrot – Mengenberechnung
+            </p>
+
+          </div>
+
+          <div className="p-6 sm:p-8">
+
             <Input
               label="Wie viele Brote?"
               value={broetchen}
               onChange={(e) => setBroetchen(e.target.value)}
             />
+
+            <div className="flex flex-col sm:flex-row gap-4 mt-6">
+
+              <button
+                onClick={calculate}
+                className="flex-1 bg-emerald-700 text-white py-4 rounded-2xl text-lg sm:text-xl font-bold hover:bg-emerald-600 transition"
+              >
+                Berechnen
+              </button>
+
+              <button
+                onClick={reset}
+                className="flex-1 bg-red-500 text-white py-4 rounded-2xl text-lg sm:text-xl font-bold hover:bg-red-400 transition"
+              >
+                Zurücksetzen
+              </button>
+
+            </div>
           </div>
+        </div>
 
-          <div className="flex flex-col sm:flex-row gap-4 mt-6">
-            <button
-              onClick={calculate}
-              className="flex-1 bg-emerald-700 py-3 sm:py-4 rounded-2xl hover:bg-emerald-600 transition text-lg sm:text-2xl font-bold text-white"
-            >
-              Berechnen
-            </button>
+        {result && (
+          <div className="section-slide bg-white rounded-3xl shadow-xl border border-gray-100 p-6 sm:p-8">
 
-            <button
-              onClick={reset}
-              className="flex-1 bg-red-500 py-3 sm:py-4 rounded-2xl hover:bg-red-400 transition text-lg sm:text-2xl font-bold text-white"
-            >
-              Zurücksetzen
-            </button>
-          </div>
+            <h2 className="text-3xl font-bold mb-6 text-gray-900">
+              <span className="inline-block w-3 h-8 rounded-full bg-gradient-to-b from-emerald-500 to-teal-500 mr-3 align-middle" />
+              Zutaten für {result.count} Brote
+            </h2>
 
-          {result && (
-            <div className="mt-6 space-y-4 animate-chatSlide">
+            <div className="space-y-3">
 
               <Result
-                title={`Zutaten für ${result.count} Brote`}
-                value=""
-                color="bg-emerald-50 text-emerald-800"
+                title="Weizenmehl (550)"
+                value={`${result.flour} g`}
+                color="bg-yellow-50 text-yellow-800"
               />
 
-              <div className="bg-white rounded-2xl shadow p-4 sm:p-5 space-y-2 text-gray-800 text-sm sm:text-base">
+              <Result
+                title="Hefe"
+                value={`${result.yeast} g`}
+                color="bg-purple-50 text-purple-800"
+              />
 
-                <p>Weizenmehl (550): <b>{result.flour} g</b></p>
+              <Result
+                title="Salz"
+                value={`${result.salt} g`}
+                color="bg-slate-100 text-slate-800"
+              />
 
-                <p>Hefe: <b>{result.yeast} g</b></p>
+              <Result
+                title="Malzbackmittel"
+                value={`${result.malt} g`}
+                color="bg-orange-50 text-orange-800"
+              />
 
-                <p>Salz: <b>{result.salt} g</b></p>
+              <Result
+                title="Vollmilchpulver"
+                value={`${result.milkPowder} g`}
+                color="bg-pink-50 text-pink-800"
+              />
 
-                <p>Malzbackmittel: <b>{result.malt} g</b></p>
+              <Result
+                title="Backmargarine"
+                value={`${result.margarine} g`}
+                color="bg-cyan-50 text-cyan-800"
+              />
 
-                <p>Vollmilchpulver: <b>{result.milkPowder} g</b></p>
-
-                <p>Backmargarine: <b>{result.margarine} g</b></p>
-
-                <p>Wasser: <b>{result.water} g</b></p>
-
-              </div>
+              <Result
+                title="Wasser"
+                value={`${result.water} g`}
+                color="bg-sky-50 text-sky-800"
+              />
 
               <Result
                 title="Gesamtteig"
                 value={`${result.totalDough} g`}
-                color="bg-yellow-50 text-yellow-800"
+                color="bg-emerald-50 text-emerald-800"
               />
 
-              <div className="bg-gray-950 text-green-300 p-4 rounded-xl font-mono text-xs sm:text-sm overflow-x-auto">
-                Gesamtteig = Summe aller Zutaten
-                <br />
-                = {result.totalDough} g
+            </div>
+
+            <div className="mt-8 bg-gray-950 border border-gray-800 rounded-2xl p-5 text-green-300 font-mono shadow-inner">
+
+              <div className="text-amber-300 font-bold mb-3">
+                Erklärung:
               </div>
 
-              <div className="bg-gray-100 p-4 rounded-2xl shadow text-gray-800 leading-relaxed text-sm sm:text-base">
-                <h3 className="font-bold text-base sm:text-lg mb-2">
-                  Zubereitung:
-                </h3>
+              <div>
+                &gt; Gesamtteig = Summe aller Zutaten
+              </div>
 
-                <p>
-                  Knetung: 4 Min Stufe 1, 3 Min Stufe 2.
-                  <br />
-                  Teigtemperatur: 26°C
-                  <br />
-                  Teigruhe: 15 Min.
-                  <br />
-                  Rundwirken, entspannen lassen, formen.
-                  <br />
-                  Stückgare: 35 Min bei 32°C & 72% Luftfeuchtigkeit.
-                  <br />
-                  Backen: 220°C für ca. 35 Min.
-                </p>
+              <div>
+                &gt; {result.totalDough} g
               </div>
 
             </div>
-          )}
-        </Section>
+
+            <div className="mt-8 bg-gray-50 border border-gray-200 rounded-2xl p-5">
+
+              <h3 className="font-bold text-xl mb-4">
+                Zubereitung
+              </h3>
+
+              <div className="space-y-2 text-gray-700">
+
+                <p>• Knetung: 4 Min Stufe 1, 3 Min Stufe 2</p>
+                <p>• Teigtemperatur: 26°C</p>
+                <p>• Teigruhe: 15 Minuten</p>
+                <p>• Rundwirken und formen</p>
+                <p>• Stückgare: 35 Min bei 32°C und 72% Luftfeuchtigkeit</p>
+                <p>• Backen: 220°C für ca. 35 Minuten</p>
+
+              </div>
+            </div>
+
+          </div>
+        )}
 
       </div>
-
-      <style>
-        {`
-          .animate-chatSlide {
-            animation: chatSlide 0.45s ease-out forwards;
-          }
-
-          @keyframes chatSlide {
-            from {
-              opacity: 0;
-              transform: translateY(20px) scale(0.97);
-            }
-            to {
-              opacity: 1;
-              transform: translateY(0) scale(1);
-            }
-          }
-        `}
-      </style>
     </div>
   );
 }
@@ -183,7 +238,7 @@ export default function App() {
 function Input({ label, value, onChange }) {
   return (
     <div>
-      <label className="block mb-2 font-semibold text-gray-700 text-sm sm:text-base">
+      <label className="block mb-2 font-semibold text-gray-700">
         {label}
       </label>
 
@@ -191,20 +246,19 @@ function Input({ label, value, onChange }) {
         type="number"
         value={value}
         onChange={onChange}
-        className="w-full border border-gray-300 rounded-xl px-4 py-3 text-base sm:text-lg focus:outline-none focus:ring-2 focus:ring-emerald-600"
+        className="
+          w-full
+          border
+          border-gray-300
+          rounded-xl
+          px-4
+          py-3
+          text-lg
+          focus:outline-none
+          focus:ring-2
+          focus:ring-emerald-600
+        "
       />
-    </div>
-  );
-}
-
-function Section({ title, children }) {
-  return (
-    <div className="bg-white rounded-3xl shadow-xl p-4 sm:p-8">
-      <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold mb-6 text-gray-900">
-        {title}
-      </h2>
-
-      {children}
     </div>
   );
 }
@@ -212,17 +266,27 @@ function Section({ title, children }) {
 function Result({ title, value, color }) {
   return (
     <div
-      className={`flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 rounded-xl px-4 sm:px-5 py-4 ${color}`}
+      className={`
+        result-slide
+        flex
+        flex-col
+        sm:flex-row
+        sm:justify-between
+        sm:items-center
+        gap-2
+        rounded-xl
+        px-5
+        py-4
+        ${color}
+      `}
     >
-      <span className="font-semibold text-base sm:text-lg">
+      <span className="font-semibold">
         {title}
       </span>
 
-      {value && (
-        <span className="font-black text-xl sm:text-2xl break-words">
-          {value}
-        </span>
-      )}
+      <span className="font-black text-xl">
+        {value}
+      </span>
     </div>
   );
 }

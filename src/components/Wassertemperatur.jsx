@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 
 export default function App() {
@@ -42,8 +41,7 @@ export default function App() {
     const mehl = Number(indirektForm.mehltemperatur);
     const vorteig = Number(indirektForm.vorteigtemperatur);
 
-    const wasser =
-      (teig - knet) * 3 - mehl - vorteig;
+    const wasser = (teig - knet) * 3 - mehl - vorteig;
 
     setIndirektResult({
       wasser,
@@ -65,23 +63,63 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-100 via-orange-50 to-emerald-50 p-4">
+    <div className="min-h-screen bg-gradient-to-br from-slate-100 via-orange-50 to-emerald-50 p-3 sm:p-6">
+      <style>{`
+        @keyframes sectionSlide {
+          from {
+            opacity: 0;
+            transform: translateY(-24px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        @keyframes resultSlide {
+          from {
+            opacity: 0;
+            transform: translateY(18px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        .section-slide {
+          animation: sectionSlide .5s ease forwards;
+        }
+
+        .result-slide {
+          animation: resultSlide .4s ease forwards;
+        }
+      `}</style>
+
       <div className="max-w-6xl mx-auto space-y-8">
 
-        <div className="bg-white rounded-3xl shadow-xl p-8">
-          <h1 className="text-4xl font-bold text-gray-900">
-            Wassertemperatur Rechner
-          </h1>
+        {/* HEADER */}
+        <div className="section-slide bg-white rounded-3xl shadow-xl border border-blue-100 overflow-hidden">
 
-          <p className="text-gray-600 mt-2">
-            Direkte und indirekte Teigführung
-          </p>
+          <div className="bg-gradient-to-r from-blue-600 to-cyan-600 p-6 sm:p-8 text-white">
+
+            <h1 className="text-3xl sm:text-5xl font-black">
+              Wassertemperatur Rechner
+            </h1>
+
+            <p className="mt-3 text-base sm:text-xl text-blue-50">
+              Direkte und indirekte Teigführung
+            </p>
+
+          </div>
+
         </div>
 
-        {/* Direkte Teigführung */}
+        {/* DIREKT */}
         <Section title="Direkte Teigführung">
 
           <div className="grid md:grid-cols-3 gap-5">
+
             <Input
               label="Gewünschte Teigtemperatur (°C)"
               value={direktForm.teigtemperatur}
@@ -114,46 +152,62 @@ export default function App() {
                 })
               }
             />
+
           </div>
 
-          <div className="flex gap-4 mt-6">
+          <div className="flex flex-col sm:flex-row gap-4 mt-6">
+
             <button
               onClick={berechneDirekt}
-              className="flex-1 bg-emerald-700 text-white py-4 rounded-2xl text-xl font-bold hover:bg-emerald-600 transition"
+              className="flex-1 bg-emerald-700 text-white py-4 rounded-2xl text-lg sm:text-xl font-bold hover:bg-emerald-600 transition"
             >
               Berechnen
             </button>
 
             <button
               onClick={resetDirekt}
-              className="flex-1 bg-red-500 text-white py-4 rounded-2xl text-xl font-bold hover:bg-red-400 transition"
+              className="flex-1 bg-red-500 text-white py-4 rounded-2xl text-lg sm:text-xl font-bold hover:bg-red-400 transition"
             >
               Zurücksetzen
             </button>
+
           </div>
 
           {direktResult && (
             <div className="mt-6 space-y-4">
+
               <Result
                 title="Wassertemperatur"
                 value={`${direktResult.wasser.toFixed(1)} °C`}
                 color="bg-emerald-50 text-emerald-800"
               />
 
-              <div className="bg-gray-950 text-green-300 p-4 rounded-xl font-mono">
-                ({direktResult.teig} - {direktResult.knet}) × 2 -{" "}
-                {direktResult.mehl}
-                <br />
-                = {direktResult.wasser.toFixed(1)} °C
+              <div className="bg-gray-950 border border-gray-800 rounded-xl p-4 text-green-300 font-mono shadow-inner">
+
+                <div className="text-amber-300 font-bold mb-2">
+                  Erklärung:
+                </div>
+
+                <div>
+                  ({direktResult.teig} - {direktResult.knet}) × 2 - {direktResult.mehl}
+                </div>
+
+                <div>
+                  = {direktResult.wasser.toFixed(1)} °C
+                </div>
+
               </div>
+
             </div>
           )}
+
         </Section>
 
-        {/* Indirekte Teigführung */}
+        {/* INDIREKT */}
         <Section title="Indirekte Teigführung">
 
           <div className="grid md:grid-cols-2 gap-5">
+
             <Input
               label="Gewünschte Teigtemperatur (°C)"
               value={indirektForm.teigtemperatur}
@@ -197,41 +251,55 @@ export default function App() {
                 })
               }
             />
+
           </div>
 
-          <div className="flex gap-4 mt-6">
+          <div className="flex flex-col sm:flex-row gap-4 mt-6">
+
             <button
               onClick={berechneIndirekt}
-              className="flex-1 bg-blue-700 text-white py-4 rounded-2xl text-xl font-bold hover:bg-blue-600 transition"
+              className="flex-1 bg-blue-700 text-white py-4 rounded-2xl text-lg sm:text-xl font-bold hover:bg-blue-600 transition"
             >
               Berechnen
             </button>
 
             <button
               onClick={resetIndirekt}
-              className="flex-1 bg-red-500 text-white py-4 rounded-2xl text-xl font-bold hover:bg-red-400 transition"
+              className="flex-1 bg-red-500 text-white py-4 rounded-2xl text-lg sm:text-xl font-bold hover:bg-red-400 transition"
             >
               Zurücksetzen
             </button>
+
           </div>
 
           {indirektResult && (
             <div className="mt-6 space-y-4">
+
               <Result
                 title="Wassertemperatur"
                 value={`${indirektResult.wasser.toFixed(1)} °C`}
                 color="bg-blue-50 text-blue-800"
               />
 
-              <div className="bg-gray-950 text-green-300 p-4 rounded-xl font-mono">
-                ({indirektResult.teig} - {indirektResult.knet}) × 3 -{" "}
-                {indirektResult.mehl} -{" "}
-                {indirektResult.vorteig}
-                <br />
-                = {indirektResult.wasser.toFixed(1)} °C
+              <div className="bg-gray-950 border border-gray-800 rounded-xl p-4 text-green-300 font-mono shadow-inner">
+
+                <div className="text-amber-300 font-bold mb-2">
+                  Erklärung:
+                </div>
+
+                <div>
+                  ({indirektResult.teig} - {indirektResult.knet}) × 3 - {indirektResult.mehl} - {indirektResult.vorteig}
+                </div>
+
+                <div>
+                  = {indirektResult.wasser.toFixed(1)} °C
+                </div>
+
               </div>
+
             </div>
           )}
+
         </Section>
 
       </div>
@@ -258,12 +326,18 @@ function Input({ label, value, onChange }) {
 
 function Section({ title, children }) {
   return (
-    <div className="bg-white rounded-3xl shadow-xl p-8">
-      <h2 className="text-3xl font-bold mb-6 text-gray-900">
+    <div className="section-slide bg-white rounded-3xl shadow-xl border border-gray-100 p-6 sm:p-8">
+
+      <h2 className="text-2xl sm:text-3xl font-bold mb-8 text-gray-900">
+
+        <span className="inline-block w-3 h-8 rounded-full bg-gradient-to-b from-emerald-500 to-teal-500 mr-3 align-middle" />
+
         {title}
+
       </h2>
 
       {children}
+
     </div>
   );
 }
@@ -271,13 +345,13 @@ function Section({ title, children }) {
 function Result({ title, value, color }) {
   return (
     <div
-      className={`flex justify-between items-center rounded-xl px-5 py-4 ${color}`}
+      className={`result-slide flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 rounded-xl px-5 py-4 ${color}`}
     >
       <span className="font-semibold text-lg">
         {title}
       </span>
 
-      <span className="font-black text-2xl">
+      <span className="font-black text-xl sm:text-2xl">
         {value}
       </span>
     </div>
