@@ -143,7 +143,23 @@ export default function App() {
         `}
       </style>
 
-      <div className="max-w-7xl mx-auto space-y-6 sm:space-y-10">
+      <div className="max-w-7xl mx-auto space-y-6 sm:space-y-10 section-slide">
+                {/* HEADER */}
+        <div className="section-slide bg-white rounded-3xl shadow-xl border border-blue-100 overflow-hidden">
+
+          <div className="bg-gradient-to-r from-blue-600 to-cyan-600 p-6 sm:p-8 text-white">
+
+            <h1 className="text-3xl sm:text-5xl font-black">
+              Roggenbrot Rechner
+            </h1>
+
+            <p className="mt-3 text-base sm:text-xl text-blue-50">
+              Manuell
+            </p>
+
+          </div>
+
+        </div>
         <div className="bg-white rounded-2xl sm:rounded-3xl shadow-xl grid md:grid-cols-2 overflow-hidden border border-orange-100">
           <div className="p-4 sm:p-8">
             <h1 className="text-2xl sm:text-4xl font-bold mb-6 sm:mb-8 text-gray-900">
