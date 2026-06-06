@@ -79,8 +79,8 @@ const App = () => {
                 <Route
                   path="/"
                   element={
-                    <section className="overflow-hidden rounded-2xl bg-amber-50">
-                      <div className="relative min-h-[80vh] overflow-hidden">
+                    <section className="overflow-hidden rounded-2xl bg-amber-50 ">
+                      <div className="relative min-h-[80vh] overflow-hidden p-4">
                         <img
                           src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=1800&q=80"
                           alt="Frisch gebackenes deutsches Brot"
@@ -94,7 +94,7 @@ const App = () => {
                             Deutsche Backkunst
                           </p>
 
-                          <h1 className="max-w-4xl text-4xl font-bold leading-tight md:text-6xl">
+                          <h1 className="max-w-4xl text-4xl font-bold leading-tight md:text-6xl p-2 ">
                             Die Geschichte des deutschen B&auml;ckerhandwerks
                           </h1>
 
